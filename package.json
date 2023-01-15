@@ -4,7 +4,7 @@
   "description": "Backend API of a stackoverflow-lite project",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "nodemon --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,12 @@
   },
   "homepage": "https://github.com/G-rizz/lite_stack2#readme",
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
   }
 }
