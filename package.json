@@ -1,0 +1,31 @@
+{
+  "name": "stackoverflow-lite-backend",
+  "version": "1.0.0",
+  "description": "Backend API of a stackoverflow-lite project",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G-rizz/lite_stack2.git"
+  },
+  "keywords": [
+    "Babel",
+    "ES",
+    "lint",
+    "JWT",
+    "Auth",
+    "class",
+    "controllers"
+  ],
+  "author": "Conrad P.B",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/G-rizz/lite_stack2/issues"
+  },
+  "homepage": "https://github.com/G-rizz/lite_stack2#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
