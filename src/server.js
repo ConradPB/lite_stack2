@@ -38,27 +38,70 @@ app.delete('/users/:userId', (req, res) => {
   )
   })
 
-  app.get('/messages', (req, res) => {
-    return res.send(Object.values(messages))
+  app.get('/questions', (req, res) => {
+    return res.send(Object.values(questions))
     })
   
-  app.get('/messages/:messageId', (req, res) => {
-    return res.send(messages[req.params.messageId])
+  app.get('/questions/:questionId', (req, res) => {
+    return res.send(questions[req.params.questionId])
     })
 
-  app.post('/messages', (req, res) => {
+  app.post('/questions', (req, res) => {
   const id = uuidv4();
-  const message = {
+  const question = {
     id,
     text: req.body.text,
     userId: req.me.id
   };
 
-  messages[id] = message;
+  questions[id] = question;
 
-  return res.send(message);
+  return res.send(question);
+})
+
+router.delete('/:questionId', (req, res) => {
+  const {
+    [req.params.questionId]: question,
+    ...otherQuestions
+  } = req.context.models.questions;
+
+  req.context.models.questions = otherQuestions;
+
+  return res.send(question);
 })
   
+app.get('/answers', (req, res) => {
+  return res.send(Object.values(answers))
+  })
+
+app.get('/answers/:answerId', (req, res) => {
+  return res.send(answers[req.params.answerId])
+  })
+
+app.post('/answers', (req, res) => {
+const id = uuidv4();
+const answer = {
+  id,
+  text: req.body.text,
+  userId: req.me.id
+};
+
+answers[id] = answer
+
+return res.send(answer)
+})
+
+router.delete('/:answerId', (req, res) => {
+  const {
+    [req.params.answerId]: answer,
+    ...otherMessages
+  } = req.context.models.answers
+
+  req.context.models.answers = otherAnswers;
+
+  return res.send(answer);
+})
+
     
 
   let users = {
@@ -70,9 +113,13 @@ app.delete('/users/:userId', (req, res) => {
       id: '2',
       username: 'Tia reed',
     },
+    3: {
+      id: '3',
+      username: 'Sofi trey',
+    },
   };
   
-  let messages = {
+  let questions = {
     1: {
       id: '1',
       text: 'Hello all, How u today?',
@@ -80,10 +127,33 @@ app.delete('/users/:userId', (req, res) => {
     },
     2: {
       id: '2',
-      text: 'Itsss all gooodd brahh!!',
+      text: 'Whats the weather like outside?',
       userId: '2',
     },
+    3: {
+      id: '3',
+      text: 'So, shall we go?',
+      userId: '3',
+    },
   };
+
+  let answers = {
+    1: {
+      id: '1',
+      text: 'Hi, we gud',
+      userId: '1',
+    },
+    2: {
+      id: '2',
+      text: 'Itsss all gooodd brahh, weathers fine!!',
+      userId: '2',
+    },
+    3: {
+      id: '3',
+      text: 'Ya.. Lets go.. will be dark soon',
+      userId: '3',
+    },
+  }
 
 app.listen(process.env.PORT, () =>
   console.log(`app is ready and listening on port ${process.env.PORT}!`),
