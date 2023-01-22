@@ -94,7 +94,7 @@ return res.send(answer)
 router.delete('/:answerId', (req, res) => {
   const {
     [req.params.answerId]: answer,
-    ...otherMessages
+    ...otherAnswers
   } = req.context.models.answers
 
   req.context.models.answers = otherAnswers;
