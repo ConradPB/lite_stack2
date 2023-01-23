@@ -14,6 +14,10 @@ app.use((req, res, next) => {
   next();
 })
 
+app.get('/session', (req, res) => {
+  return res.send(users[req.me.id]);
+})
+
 app.get('/users', (req, res) => {
   return res.send(Object.values(users))
   })
@@ -38,16 +42,16 @@ app.delete('/users/:userId', (req, res) => {
   )
   })
 
-  app.get('/questions', (req, res) => {
+app.get('/questions', (req, res) => {
     return res.send(Object.values(questions))
     })
   
-  app.get('/questions/:questionId', (req, res) => {
+app.get('/questions/:questionId', (req, res) => {
     return res.send(questions[req.params.questionId])
     })
 
-  app.post('/questions', (req, res) => {
-  const id = uuidv4();
+app.post('/questions', (req, res) => {
+  const id = uuidv4()
   const question = {
     id,
     text: req.body.text,
@@ -59,13 +63,13 @@ app.delete('/users/:userId', (req, res) => {
   return res.send(question);
 })
 
-router.delete('/:questionId', (req, res) => {
+app.delete('/questions/:questionId', (req, res) => {
   const {
     [req.params.questionId]: question,
     ...otherQuestions
-  } = req.context.models.questions;
+  } = questions
 
-  req.context.models.questions = otherQuestions;
+  questions = otherQuestions;
 
   return res.send(question);
 })
@@ -91,15 +95,15 @@ answers[id] = answer
 return res.send(answer)
 })
 
-router.delete('/:answerId', (req, res) => {
+app.delete('/answers/:answerId', (req, res) => {
   const {
     [req.params.answerId]: answer,
     ...otherAnswers
-  } = req.context.models.answers
+  } = answers
 
-  req.context.models.answers = otherAnswers;
+  answers = otherAnswers
 
-  return res.send(answer);
+  return res.send(answer)
 })
 
     
