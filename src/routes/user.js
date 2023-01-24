@@ -10,4 +10,5 @@ router.get('/:userId', (req, res) => {
     return res.status(200).json(req.context.models.users[req.params.userId])
     })
 
+
 export default router
