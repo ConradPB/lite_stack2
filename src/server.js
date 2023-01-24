@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
+import models from './models'
 
 const app = express()
 
@@ -10,20 +11,23 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
-  req.me = users[1]
+  req.context = {
+    models,
+    me: models.users[1],
+  };
   next();
 })
 
 app.get('/session', (req, res) => {
-  return res.send(users[req.me.id]);
+  return res.status(200).json(req.context.models.users[req.context.me.id])
 })
 
 app.get('/users', (req, res) => {
-  return res.send(Object.values(users))
+  return res.status(200).json(Object.values(req.context.models.users))
   })
 
 app.get('/users/:userId', (req, res) => {
-  return res.send(users[req.params.userId])
+  return res.status(200).json(req.context.models.users[req.params.userId])
   })
 
 app.post('/users', (req, res) => {
@@ -43,11 +47,11 @@ app.delete('/users/:userId', (req, res) => {
   })
 
 app.get('/questions', (req, res) => {
-    return res.send(Object.values(questions))
+    return res.status(200).json(Object.values(req.context.models.questions))
     })
   
 app.get('/questions/:questionId', (req, res) => {
-    return res.send(questions[req.params.questionId])
+    return res.status(200).json(req.context.models.questions[req.params.questionId])
     })
 
 app.post('/questions', (req, res) => {
@@ -55,109 +59,58 @@ app.post('/questions', (req, res) => {
   const question = {
     id,
     text: req.body.text,
-    userId: req.me.id
-  };
+    userId: req.context.me.id
+  }
 
-  questions[id] = question;
+  req.context.models.questions[id] = question
 
-  return res.send(question);
+  return res.status(200).json(question)
 })
 
 app.delete('/questions/:questionId', (req, res) => {
   const {
     [req.params.questionId]: question,
     ...otherQuestions
-  } = questions
+  } = req.context.models.questions
 
-  questions = otherQuestions;
+  req.context.models.questions = otherQuestions;
 
-  return res.send(question);
+  return res.status(200).json(question)
 })
   
 app.get('/answers', (req, res) => {
-  return res.send(Object.values(answers))
+  return res.status(200).json(Object.values(req.context.models.answers))
   })
 
 app.get('/answers/:answerId', (req, res) => {
-  return res.send(answers[req.params.answerId])
+  return res.status(200).json(req.context.models.answers[req.params.answerId])
   })
 
 app.post('/answers', (req, res) => {
-const id = uuidv4();
+const id = uuidv4()
 const answer = {
   id,
   text: req.body.text,
-  userId: req.me.id
+  userId: req.context.me.id
 };
 
-answers[id] = answer
+req.context.models.answers[id] = answer
 
-return res.send(answer)
+return res.status(200).json(answer)
 })
 
 app.delete('/answers/:answerId', (req, res) => {
   const {
     [req.params.answerId]: answer,
     ...otherAnswers
-  } = answers
+  } = req.context.models.answers
 
-  answers = otherAnswers
+  req.context.models.answers = otherAnswers
 
-  return res.send(answer)
+  return res.status(200).json(answer)
 })
 
-    
 
-  let users = {
-    1: {
-      id: '1',
-      username: 'Conrad P.B',
-    },
-    2: {
-      id: '2',
-      username: 'Tia reed',
-    },
-    3: {
-      id: '3',
-      username: 'Sofi trey',
-    },
-  };
-  
-  let questions = {
-    1: {
-      id: '1',
-      text: 'Hello all, How u today?',
-      userId: '1',
-    },
-    2: {
-      id: '2',
-      text: 'Whats the weather like outside?',
-      userId: '2',
-    },
-    3: {
-      id: '3',
-      text: 'So, shall we go?',
-      userId: '3',
-    },
-  };
-
-  let answers = {
-    1: {
-      id: '1',
-      text: 'Hi, we gud',
-      userId: '1',
-    },
-    2: {
-      id: '2',
-      text: 'Itsss all gooodd brahh, weathers fine!!',
-      userId: '2',
-    },
-    3: {
-      id: '3',
-      text: 'Ya.. Lets go.. will be dark soon',
-      userId: '3',
-    },
-  }
 
 app.listen(process.env.PORT, () =>
   console.log(`app is ready and listening on port ${process.env.PORT}!`),
