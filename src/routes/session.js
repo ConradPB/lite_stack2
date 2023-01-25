@@ -1,9 +1,11 @@
 import { Router } from 'express'
+import Session from '../controllers/session'
+
 
 const router = Router()
 
-router.get('/', (req, res) => {
-    return res.status(200).json(req.context.models.users[req.context.me.id])
-  })
+const session = new Session()
+
+router.get('/', session.getUser) 
 
 export default router

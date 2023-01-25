@@ -1,14 +1,13 @@
 import { Router } from 'express'
+import User from '../controllers/user'
 
 const router = Router()
 
-router.get('/', (req, res) => {
-    return res.status(200).json(Object.values(req.context.models.users))
-    })
+const user = new User()
+
+router.get('/', user.fetchUsers)
   
-router.get('/:userId', (req, res) => {
-    return res.status(200).json(req.context.models.users[req.params.userId])
-    })
+router.get('/:userId', user.fetchUser) 
 
 
 export default router

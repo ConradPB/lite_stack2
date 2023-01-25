@@ -1,39 +1,19 @@
-import { v4 as uuidv4 } from 'uuid'
 import { Router } from 'express'
+import Question from '../controllers/question'
 
 const router = Router()
 
-router.get('/', (req, res) => {
-    return res.status(200).json(Object.values(req.context.models.questions))
-    })
+const question = new Question()
+
+router.get('/', question.fetchQuestions)
   
-router.get('/:questionId', (req, res) => {
-    return res.status(200).json(req.context.models.questions[req.params.questionId])
-    })
+router.get('/:questionId', question.fetchQuestion)
 
-router.post('/', (req, res) => {
-  const id = uuidv4()
-  const question = {
-    id,
-    text: req.body.text,
-    userId: req.context.me.id
-  }
+router.post('/', question.createQuestion)
 
-  req.context.models.questions[id] = question
+router.put('/:questionId', question.updateQuestion)
 
-  return res.status(200).json(question)
-})
-
-router.delete('/:questionId', (req, res) => {
-  const {
-    [req.params.questionId]: question,
-    ...otherQuestions
-  } = req.context.models.questions
-
-  req.context.models.questions = otherQuestions;
-
-  return res.status(200).json(question)
-})
+router.delete('/:questionId', question.deleteQuestion)
 
 
 export default router
