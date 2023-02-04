@@ -1,12 +1,17 @@
 class User {
-    fetchUsers (req,res) {
-        return res.status(200).json(Object.values(req.context.models.users))
-            }
+    async fetchUsers (req,res) {
+        const users = await req.context.models.User.find()
 
-    fetchUser (req,res) {
-        return res.status(200).json(req.context.models.users[req.params.userId])
-            
-            }
+        return res.status(200).json(users)
+
+    }
+
+    async fetchUser (req,res) {
+        const user = await req.context.models.User.findById(req.params.userId)
+
+        return res.status(200).json(user)
+
+    }
 }
 
 export default User

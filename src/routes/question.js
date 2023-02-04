@@ -9,6 +9,9 @@ router.get('/', question.fetchQuestions)
   
 router.get('/:questionId', question.fetchQuestion)
 
+router.get('/', question.fetchQuestions)
+
+
 router.post('/', question.createQuestion)
 
 router.put('/:questionId', question.updateQuestion)
