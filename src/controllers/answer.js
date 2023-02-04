@@ -15,12 +15,15 @@ class Answer {
 
     }
 
-    async createAnswer (req,res) {
+    async createAnswer (req,res,next) {
         
          const answer = await req.context.models.Answer.create({
             text: req.body.text,
             userId: req.context.me.id
-        })
+        }).catch((error) => {
+            error.statusCode = 400;
+            next(error);
+          })
   return res.status(200).json(answer)
 }
 
