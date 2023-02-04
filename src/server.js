@@ -5,6 +5,7 @@ import cors from 'cors'
 import routes from './routes'
 import models, { connectDb } from './models'
 mongoose.set('strictQuery', true) //enables strict query mode in mongoDB
+import errorHandler from './middleware/errorHandler'
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use('/users', routes.user)
 app.use('/questions', routes.question)
 app.use('/answers', routes.answer)
 app.use('/qna', routes.QnA)
+app.use(errorHandler)
 
 
 const eraseDatabaseOnSync = true

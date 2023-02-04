@@ -17,12 +17,15 @@ class Question {
     }
 
     async createQuestion (req,res) {
-        
-        const question = await req.context.models.Question.create({
-            text: req.body.text,
-            userId: req.context.me.id
-  })
-  
+        let question;
+        try {
+             question = await req.context.models.Question.create({
+                text: req.body.text,
+                userId: req.context.me.id
+      })
+        } catch (error) {
+            return res.status(400).json({ error: error.toString() })
+        }
   return res.status(200).json(question)
     }
 
