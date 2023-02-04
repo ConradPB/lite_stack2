@@ -1,53 +1,58 @@
-import { v4 as uuidv4 } from 'uuid'
+
 
 class Answer {
-    fetchAnswers (req,res) {
-        return res.status(200).json(Object.values(req.context.models.answers))
+    async fetchAnswers (req,res) {
+        const answers = await req.context.models.Answer.find()
+
+        return res.status(200).json(answers)
 
     }
 
-    fetchAnswer (req,res) {
-        return res.status(200).json(req.context.models.answers[req.params.answerId])
+    async fetchAnswer (req,res) {
+        const answer = await req.context.models.Answer.find({ question: req.params.questionId })
+        
+        return res.status(200).json(answer)
 
     }
 
-    createAnswer (req,res) {
-        const id = uuidv4()
-        const answer = {
-            id,
+    async createAnswer (req,res) {
+        
+         const answer = await req.context.models.Answer.create({
             text: req.body.text,
             userId: req.context.me.id
-  }
-  
-  req.context.models.answers[id] = answer
-  
+        })
   return res.status(200).json(answer)
-    }
+}
 
-    updateAnswer (req,res) {
+    async updateAnswer (req,res) {
         
-        const answer =  req.context.models.answers[req.params.answerId]
+        const answer =  await req.context.models.Answer.findById(req.params.answerId)
 
         if (answer) {
-            answer.text = req.body.text;
-            answer.userId = req.context.me.id;
-            return res.status(200).json(answer)
-          } else {
+            await answer.updateOne({
+                text: req.body.text,
+                userId: req.context.me.id
+
+            })
+            
+            return res.status(200).json(answer)}
+           else {
             return res.status(404).json({ message: 'Answer not found' })
           }
 
     }
 
-    deleteAnswer (req,res) {
-        const {
-            [req.params.answerId]: answer,
-            ...otherAnswers
-          } = req.context.models.answers
-        
-          req.context.models.answers = otherAnswers
+    async deleteAnswer (req,res) {
+
+        const answer =  await req.context.models.Answer.findById(req.params.answerId)
+            
+        if (answer) {
+            await answer.remove()
         
           return res.status(200).json(answer)
     }
+}
+
 }
 
 export default Answer
