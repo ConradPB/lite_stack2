@@ -9,5 +9,9 @@ router.get('/', user.fetchUsers)
   
 router.get('/:userId', user.fetchUser) 
 
+router.post('/', user.registerUser)
+
+router.post('/login', user.loginUser)
+
 
 export default router
