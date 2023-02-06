@@ -51,16 +51,22 @@ const createUsersWithMessages = async () => {
     first_name: 'Conrad',
     last_name: 'P.B',
     username: 'Conrad P.B',
+    email: 'abc1@gmail.com',
+    password: 'abc'
   })
   const user2 = new models.User({
     first_name: 'Tia',
     last_name: 'Reed',
     username: 'Tia Reed',
+    email: 'abc2@gmail.com',
+    password: 'def'
   })
   const user3 = new models.User({
     first_name: 'Sofie',
     last_name: 'Einer',
     username: 'Sofie Einer',
+    email: 'abc3@gmail.com',
+    password: 'ghi'
   })
 
 
