@@ -23,14 +23,14 @@ class User {
         
         // Validate user input
         if (!(email && password && username && first_name && last_name)) {
-          res.status(400).send("All input is required")
+          res.status(400).send('All input is required')
         }
         
         // check if user already exist
         // Validate if user exist in our database
         const oldUser = await req.context.models.User.findOne({ email })
         if (oldUser) {
-          return res.status(409).send("User Already Exist. Please Login");
+          return res.status(409).send('User Already Exists. Please Login');
         }
         
         //Encrypt user password
@@ -49,7 +49,7 @@ class User {
           { user_id: user._id, email },
           process.env.JWT_SECRET ,
           {
-            expiresIn: "30d",
+            expiresIn: '30d',
           }
           )
           
@@ -82,7 +82,7 @@ class User {
             { user_id: user._id, email },
             process.env.JWT_SECRET,
             {
-              expiresIn: "25d",
+              expiresIn: '25d',
             }
           )
           
@@ -93,7 +93,7 @@ class User {
           res.status(200).json(user)
         } else{
 
-        res.status(400).send("Invalid Credentials")
+        res.status(400).send('Invalid Credentials')
         
         }
       } catch (error) {
@@ -101,6 +101,13 @@ class User {
       }
     
       }
+
+  async welcomeUser (req,res) {
+    res.status(200).send('Welcome 🙌 ')                                                                                                               
+  
+      }
+
+
 
         
 
