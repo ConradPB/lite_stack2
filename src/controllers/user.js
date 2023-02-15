@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import env from '../../config/dev.env'
 
 class User {
     async fetchUsers (req,res) {
@@ -47,7 +48,7 @@ class User {
         // Create token
         const token = jwt.sign(
           { user_id: user._id, email },
-          process.env.JWT_SECRET ,
+          env.JWT_SECRET ,
           {
             expiresIn: '30d',
           }
@@ -80,7 +81,7 @@ class User {
           // Create token
           const token = jwt.sign(
             { user_id: user._id, email },
-            process.env.JWT_SECRET,
+            env.JWT_SECRET,
             {
               expiresIn: '25d',
             }
@@ -103,7 +104,7 @@ class User {
       }
 
   async welcomeUser (req,res) {
-    res.status(200).send('Welcome 🙌 ')                                                                                                               
+    res.status(200).send('Welcome 🙌')                                                                                                               
   
       }
 

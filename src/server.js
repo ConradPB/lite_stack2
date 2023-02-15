@@ -1,31 +1,9 @@
-import 'dotenv/config'
-import express from 'express'
 import mongoose from 'mongoose'
-import cors from 'cors'
-import routes from './routes'
+import 'dotenv/config'
+import app from './app'
 import models, { connectDb } from './models'
-mongoose.set('strictQuery', true) //enables strict query mode in mongoDB
-import errorHandler from './middleware/errorHandler'
+import env from '../config/dev.env'
 
-const app = express()
-
-
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(async(req, res, next) => {
-  req.context = {
-    models,
-    me: await models.User.findByLogin('Conrad P.B'),
-  }
-  next()
-})
-app.use('/session', routes.session)
-app.use('/users', routes.user)
-app.use('/questions', routes.question)
-app.use('/answers', routes.answer)
-app.use('/qna', routes.QnA)
-app.use(errorHandler)
 
 
 const eraseDatabaseOnSync = true
@@ -41,8 +19,8 @@ connectDb().then(async () => {
   }
 
 
-app.listen(process.env.PORT, () =>
-  console.log(`app is ready and listening on port ${process.env.PORT}!`),
+app.listen(env.PORT, () =>
+  console.log(`app is ready and listening on port ${env.PORT}!`),
 )
 })
 
