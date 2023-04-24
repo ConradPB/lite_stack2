@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node src/server.js",
-    "test": "cross-env jest"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage --watchAll"
   },
   "repository": {
     "type": "git",
@@ -27,9 +27,10 @@
   },
   "homepage": "https://github.com/G-rizz/lite_stack2#readme",
   "devDependencies": {
-    "@babel/core": "^7.20.12",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
     "@babel/node": "^7.20.7",
-    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-env": "^7.21.4",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.20",

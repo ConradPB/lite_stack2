@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+const Schema = mongoose.Schema
 const userSchema = new mongoose.Schema({
   first_name: {
     type: String,
@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
   token: { 
     type: String 
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 },
 { timestamps: true },
 )

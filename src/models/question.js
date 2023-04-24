@@ -10,7 +10,11 @@ const questionSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
-    answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }]
+    answers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Answer' }],
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
 
   },
   { timestamps: true },

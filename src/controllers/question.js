@@ -17,13 +17,16 @@ class Question {
     }
 
     async createQuestion (req,res,next) {
+        console.log('req.context.me:', req.context.me);
+        console.log('req.context.me.id:', req.context.me ? req.context.me.id : null);
         const question = await req.context.models.Question.create({
             text: req.body.text,
-            userId: req.context.me.id
+            user: req.context.me ? req.context.me.id : null
         }).catch((error) => {
             error.statusCode = 400;
             next(error)
         })
+
         return res.status(200).json(question)
     }
 
@@ -33,12 +36,10 @@ class Question {
         if (question) {
             await question.updateOne({
                 text:req.body.text,
-                userId: req.context.me.id
+                userId: req.context.me._id
             })
             return res.status(200).json(question)
-        } else {
-            return res.status(404).json({ message: 'Question not found' })
-        }
+        } 
     }
 
     async deleteQuestion (req,res) {
