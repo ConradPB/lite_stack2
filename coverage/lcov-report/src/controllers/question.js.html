@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/18</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,11 +118,12 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,26 +138,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,9 +177,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Answer from "../models/answer"
 class Question {
-    async fetchQuestions (req,res) {
-        const questions = await req.context.models.Question.find()
-        return res.status(200).json({ questions, })
+<span class="fstat-no" title="function not covered" >    as</span>ync fetchQuestions (req,res) {
+        const questions = <span class="cstat-no" title="statement not covered" >await req.context.models.Question.find()</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(200).json({ questions, })</span>
 &nbsp;
     }
 &nbsp;
@@ -191,31 +193,32 @@ class Question {
 <span class="cstat-no" title="statement not covered" >        return res.status(200).json({ question })</span>
     }
 &nbsp;
-    async createQuestion (req,res,next) {
-        console.log('req.context.me:', req.context.me);
-        console.log('req.context.me.id:', req.context.me ? <span class="branch-0 cbranch-no" title="branch not covered" >req.context.me.id </span>: null);
-        const question = await req.context.models.Question.create({
+<span class="fstat-no" title="function not covered" >    as</span>ync createQuestion (req,res,next) {
+<span class="cstat-no" title="statement not covered" >        console.log('req.context.me:', req.context.me);</span>
+<span class="cstat-no" title="statement not covered" >        console.log('req.context.me.id:', req.context.me ? req.context.me.id : null);</span>
+        const question = <span class="cstat-no" title="statement not covered" >await req.context.models.Question.create({</span>
             text: req.body.text,
-            user: req.context.me ? <span class="branch-0 cbranch-no" title="branch not covered" >req.context.me.id </span>: null
-        }).catch((error) =&gt; {
-            error.statusCode = 400;
-            next(error)
+            user: req.context.me ? req.context.me.id : null
+        }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >            error.statusCode = 400;</span>
+<span class="cstat-no" title="statement not covered" >            next(error)</span>
         })
 &nbsp;
-        return res.status(200).json(question)
+<span class="cstat-no" title="statement not covered" >        return res.status(200).json(question)</span>
     }
 &nbsp;
-    async updateQuestion (req,res) {
-        const question = await req.context.models.Question.findById(req.params.questionId)
-        
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (question) {
-<span class="cstat-no" title="statement not covered" >            await question.updateOne({</span>
-                text:req.body.text,
-                userId: req.context.me._id
-            })
-<span class="cstat-no" title="statement not covered" >            return res.status(200).json(question)</span>
-        } 
-    }
+<span class="fstat-no" title="function not covered" >    as</span>ync updateQuestion(req, res) {
+        const question = <span class="cstat-no" title="statement not covered" >await req.context.models.Question.findByIdAndUpdate(</span>
+          req.params.questionId,
+          { text: req.body.text },
+          { new: true }
+        );
+<span class="cstat-no" title="statement not covered" >        if (question) {</span>
+<span class="cstat-no" title="statement not covered" >          return res.status(200).json(question);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          res.status(200).json({ message: 'Question not found' });</span>
+        }
+      }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    as</span>ync deleteQuestion (req,res) {
         const question = <span class="cstat-no" title="statement not covered" >await req.context.models.Question.findById(req.params.questionId)</span>
@@ -235,7 +238,7 @@ export default Question
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-24T16:46:25.392Z
+                at 2023-04-27T19:48:40.108Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
