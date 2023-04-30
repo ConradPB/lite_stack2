@@ -30,18 +30,17 @@ class Question {
         return res.status(200).json(question)
     }
 
-    async updateQuestion(req, res) {
-        const question = await req.context.models.Question.findByIdAndUpdate(
-          req.params.questionId,
-          { text: req.body.text },
-          { new: true }
-        );
+    async updateQuestion (req,res) {
+        const question = await req.context.models.Question.findById(req.params.questionId)
+        
         if (question) {
-          return res.status(200).json(question);
-        } else {
-          res.status(200).json({ message: 'Question not found' });
-        }
-      }
+            await question.updateOne({
+                text:req.body.text,
+                userId: req.context.me._id
+            })
+            return res.status(200).json(question)
+        } 
+    }
 
     async deleteQuestion (req,res) {
         const question = await req.context.models.Question.findById(req.params.questionId)

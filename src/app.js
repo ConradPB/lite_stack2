@@ -13,13 +13,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(async(req, res, next) => {
-  req.context = {
-    models,
-    me: await models.User.findByLogin('Conrad P.B'),
-  }
-  next()
-})
+app.use(async (req, res, next) => {
+  const me = req.get('x-me-id')
+    ? await models.User.findById(req.get('x-me-id'))
+    : await models.User.findByLogin('Conrad P.B');
+  req.context = { models, me };
+  next();
+});
 app.use('/session', routes.session)
 app.use('/users', routes.user)
 app.use('/questions', routes.question)
