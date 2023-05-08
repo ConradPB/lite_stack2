@@ -3,11 +3,9 @@ node_modules
 
 #environment variables
 .env
-dev.env
-test.env
-coverage
-# testing
 
+# testing
+coverage
 
 # misc
 package-lock.json
